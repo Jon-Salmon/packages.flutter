@@ -19,13 +19,13 @@ class Page {
 
     var width: Int {
         get {
-            return Int(boxRect.width)
+            return Int(isLandscape ? boxRect.height : boxRect.width)
         }
     }
 
     var height: Int {
         get {
-            return Int(boxRect.height)
+            return Int(isLandscape ? boxRect.width : boxRect.height)
         }
     }
     
@@ -55,14 +55,18 @@ class Page {
 
     func render(width: Int, height: Int, crop: CGRect?, compressFormat: CompressFormat, backgroundColor: UIColor) -> Page.DataResult? {
         let pdfBBox = renderer.getBoxRect(.mediaBox)
-        let bitmapSize = isLandscape ? CGSize(width: height, height: width) : CGSize(width: width, height: height)
+        let bitmapSize = CGSize(width: width, height: height)
+
+        let cHeight = isLandscape ? width : height
+        let cWidth = isLandscape ? height : width
+
         let stride = Int(bitmapSize.width * 4)
         var tempData = Data(repeating: 0, count: stride * Int(bitmapSize.height))
         var data: Data?
         var success = false
-        let sx = CGFloat(width) / pdfBBox.width
-        let sy = CGFloat(height) / pdfBBox.height
-        let tx = isLandscape ? CGFloat(height) / 2 : CGFloat(0)
+        let sx = CGFloat(cWidth) / pdfBBox.width
+        let sy = CGFloat(cHeight) / pdfBBox.height
+        let tx = isLandscape ? CGFloat(cHeight) / 2 : CGFloat(0)
         let ty = CGFloat(0)
         let angle = CGFloat(renderer.rotationAngle) * CGFloat.pi / 180;
         tempData.withUnsafeMutableBytes { (ptr) in
