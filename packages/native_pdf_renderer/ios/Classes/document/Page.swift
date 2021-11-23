@@ -66,16 +66,18 @@ class Page {
         var success = false
         let sx = CGFloat(cWidth) / pdfBBox.width
         let sy = CGFloat(cHeight) / pdfBBox.height
-        let tx = isLandscape ? CGFloat(cHeight) / 2 : CGFloat(0)
-        let ty = CGFloat(0)
         let angle = CGFloat(renderer.rotationAngle) * CGFloat.pi / 180;
         tempData.withUnsafeMutableBytes { (ptr) in
             let rawPtr = ptr.baseAddress
             let rgb = CGColorSpaceCreateDeviceRGB()
             let context = CGContext(data: rawPtr, width: Int(bitmapSize.width), height: Int(bitmapSize.height), bitsPerComponent: 8, bytesPerRow: stride, space: rgb, bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue)
             if context != nil {
-                context!.scaleBy(x: sx, y: sy)
-                context!.translateBy(x: tx, y: ty)
+                if (isLandscape) {
+                    context!.scaleBy(x: sy, y: sx)
+                    context!.translateBy(x: CGFloat(pdfBBox.height), y: CGFloat(0))
+                } else {
+                    context!.scaleBy(x: sx, y: sy)
+                }
                 context!.rotate(by: -angle)
                 context!.setFillColor(backgroundColor.cgColor)
                 context!.fill(pdfBBox)
