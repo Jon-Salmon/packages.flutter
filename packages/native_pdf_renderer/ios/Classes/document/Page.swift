@@ -19,13 +19,13 @@ class Page {
 
     var width: Int {
         get {
-            return Int(boxRect.width)
+            return Int(isLandscape ? boxRect.height : boxRect.width)
         }
     }
 
     var height: Int {
         get {
-            return Int(boxRect.height)
+            return Int(isLandscape ? boxRect.width : boxRect.height)
         }
     }
 
@@ -54,8 +54,11 @@ class Page {
     }
 
     func render(width: Int, height: Int, crop: CGRect?, compressFormat: CompressFormat, backgroundColor: UIColor, quality: Int) -> Page.DataResult? {
-        let box = renderer.getBoxRect(.mediaBox)
-        let bitmapSize = isLandscape ? CGSize(width: height, height: width) : CGSize(width: width, height: height)
+        var box = renderer.getBoxRect(.mediaBox)
+        if (isLandscape) {
+            box = CGRect(x: 0, y: 0, width: box.height, height: box.width)
+        }
+        let bitmapSize = CGSize(width: width, height: height)
         let stride = Int(bitmapSize.width * 4)
         var tempData = Data(repeating: 0, count: stride * Int(bitmapSize.height))
         var data: Data?
