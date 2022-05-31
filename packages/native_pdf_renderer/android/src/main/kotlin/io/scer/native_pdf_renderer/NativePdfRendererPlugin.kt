@@ -120,7 +120,7 @@ class NativePdfRendererPlugin : FlutterPlugin, MethodCallHandler {
 
     private fun closeDocumentHandler(call: MethodCall, result: Result) {
         try {
-            val id = call.arguments<String>()
+            val id = call.arguments<String>()!!
             documents.close(id)
             result.success(null)
         } catch (e: NullPointerException) {
@@ -134,7 +134,7 @@ class NativePdfRendererPlugin : FlutterPlugin, MethodCallHandler {
 
     private fun closePageHandler(call: MethodCall, result: Result) {
         try {
-            val id = call.arguments<String>()
+            val id = call.arguments<String>()!!
             pages.close(id)
             result.success(null)
         } catch (e: NullPointerException) {
