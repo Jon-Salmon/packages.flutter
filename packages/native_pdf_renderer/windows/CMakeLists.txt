@@ -23,6 +23,9 @@ download_project(
   URL
   ${PDFIUM_URL}
   )
+# Explicitly opt in to modern CMake behaviors to avoid warnings with recent
+# versions of CMake.
+cmake_policy(VERSION 3.14...3.25)
 
 # This value is used when generating builds using this plugin, so it must
 # not be changed
