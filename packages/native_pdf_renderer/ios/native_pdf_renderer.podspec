@@ -4,8 +4,16 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'native_pdf_renderer'
+  s.version          = '1.0.0'
+  s.summary          = 'Flutter Plugin to render a PDF file.'
   s.description      = <<-DESC
+Flutter Plugin to render a PDF file.
+Downloaded by pub (not CocoaPods).
                        DESC
+  s.homepage         = 'https://github.com/ScerIO/packages.flutter/tree/main/packages/pdfx'
+  s.license          = { :type => 'MIT', :file => '../LICENSE' }
+  s.author           = { 'Serge Shkurko' => 'sergeshkurko@outlook.com' }
+  s.source           = { :http => 'https://github.com/ScerIO/packages.flutter/tree/main/packages/pdfx' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
   s.platform = :ios, '12.0'
