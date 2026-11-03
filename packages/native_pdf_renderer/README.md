@@ -25,6 +25,22 @@ For web add lines in index.html before importing main.dart.js:<br/>
 </script>
 ```
 
+## Android builds
+
+Requires Flutter 3.44 / Dart 3.12 or newer, Android compile SDK 36, and Java 17 or newer.
+The plugin supports AGP 9 built-in Kotlin and apps that still apply the Kotlin Android plugin.
+
+The example uses Flutter 3.47+, AGP 9.1, Gradle 9.3.1, and Kotlin 2.4:
+
+```sh
+cd example
+flutter pub get
+flutter build apk --release
+```
+
+The APK is written to `example/build/app/outputs/flutter-apk/app-release.apk`.
+The example uses debug signing for its release build; configure your own signing key for distribution.
+
 ## Usage example
 
 ```dart

@@ -1,3 +1,9 @@
+## Unreleased
+
+* Update Android builds for Flutter 3.47, compile SDK 36 and Java 17.
+* Support AGP 9 built-in Kotlin and migrate the Android example to the Gradle plugins DSL.
+* Require Flutter 3.44 / Dart 3.12 or newer; the example requires Flutter 3.47 / Dart 3.13.
+
 ## 4.1.0
 
 * Support UUID package version 4
